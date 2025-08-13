@@ -1,5 +1,6 @@
 #include "button.h"
-void Button::Print(Base* base)const
+std::string Button::getButton() const { return m_button;}
+void Button::Print()const 
 {
-	std::cout<<"Button : id " << m_button; 
+	std::cout<<"Button : id " << getId()<<", button : "<< getButton()<<" ("<<getRow()<<','<<getCol()<<") "; 
 }

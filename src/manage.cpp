@@ -1,5 +1,4 @@
 #include "manage.h"
-
 bool Manage::checkId(int id) 
 {
         for(int i=0 ; i<static_cast<int>((m_V).size()); i++)
@@ -26,20 +25,22 @@ int Manage::findPid(int pId)
 	return -1;
 }
 bool Manage::checkRange(int row, int col, int rowN )
-{	
+{
+	if(row<0 || col<0 ) return false;	
 	Window* w =dynamic_cast<Window*>(m_V[rowN][0]);
 	if(w==nullptr) return false;
-	return ( row>=0 && row < w->getRowCount() && col>=0 && col < w->getColCount());
+	return ( row < w->getRowCount() && col < w->getColCount());
 
 }
+//texy azat linelu pahi hamar funcion grel
+//karchacnelu pahery pahel
 void Manage::AddElement(Base* base){
 	int pId=base->getpId();
 	int id=base->getId();
 	int row=base->getRow();
 	int col=base->getCol();
 
-	if(!checkId(id)) return ;
-	else if(!m_V.empty()) {
+	if(!m_V.empty()) {
 		int rowN=findPid(pId);
 		if(rowN==-1){
 			Window* w =dynamic_cast<Window*>(base);
@@ -58,12 +59,12 @@ void Manage::AddElement(Base* base){
 		}
 	}
 }
-
 void Manage::print(){
-	for (int i = 0; i < m_V.size(); i++) {
-		for (int j = 0; j < m_V[i].size(); j++) {
+	std::cout<<"------Elements------"<<std::endl;
+	for (int i = 0; i < static_cast<int>((m_V).size()); i++) {
+		for (int j = 0; j <static_cast<int>(m_V[i].size()); j++) {
 			if (m_V[i][j])
-				std::cout << "[" << i << "," << j << "] id=" << m_V[i][j]->getId() << " ";
+				m_V[i][j]->Print();
 			else
 				std::cout << "[" << i << "," << j << "] empty" <<" ";
 		}
@@ -71,4 +72,3 @@ void Manage::print(){
 	}
 
 }
-

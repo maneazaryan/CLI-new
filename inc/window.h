@@ -10,12 +10,12 @@ class Window: public Base{
         public:
                 Window(int id, int rowCount, int colCount, int pId , int row , int col):
                         Base( id, row, col, pId), m_rowCount(rowCount), m_colCount(colCount) {}
-               // Window(int id, int rowCount, int colCount):
-                 //       Base( id, -1, -1, -1), m_rowCount(rowCount), m_colCount(colCount) {}
-                Window(int id, int rowCount, int colCount, int pId):
-                        Base( id, -1, -1, pId), m_rowCount(rowCount), m_colCount(colCount) {}
+                Window(int id, int rowCount, int colCount):
+                       Base( id, -1, -1, -1), m_rowCount(rowCount), m_colCount(colCount) {}
+                //Window(int id, int rowCount, int colCount, int pId):
+                  //      Base( id, -1, -1, pId), m_rowCount(rowCount), m_colCount(colCount) {}
 
-		void Print(Base* base)const override;
 		int getRowCount()const;
 		int getColCount()const;
+		void Print()const override;
 };

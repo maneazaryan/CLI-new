@@ -1,10 +1,12 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include <string>
 #include "base.h"
 #include "window.h"
-
+#include "text.h"
+#include "button.h"
+#include "table.h"
+#include "command.h"
 class Manage{
 	private:
 		std::vector<std::vector<Base*>> m_V;
@@ -18,7 +20,6 @@ class Manage{
 				}
 			}
 		}
-
 		bool checkId(int id);
 		int findPid(int pId);
 		bool checkRange(int row, int col, int rowN );

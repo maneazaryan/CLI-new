@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <string>
 #include "base.h"
 class Button: public Base{
         private:
@@ -7,5 +8,6 @@ class Button: public Base{
         public:
                 Button (int id, std::string button, int pId, int row, int col ):
                         Base(id, row, col, pId), m_button(button) {}
-                virtual void Print(Base* base)const override;
+		std::string getButton()const;
+                virtual void Print()const override;
 };

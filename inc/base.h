@@ -16,5 +16,5 @@ class Base{
                 int getId()const;
                 int getRow()const;
                 int getCol()const;
-                virtual void Print(Base* base)const=0;
+                virtual void Print()const=0;
 };
