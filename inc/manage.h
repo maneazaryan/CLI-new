@@ -9,19 +9,15 @@
 #include "command.h"
 class Manage{
 	private:
-		std::vector<std::vector<Base*>> m_V;
+		std::vector<Base*> m_v;
 	public:
 		Manage(){}
-		virtual~Manage(){
-			for(int i=0; i<static_cast<int>(m_V.size());i++){
-				for(int j=0; j<static_cast<int>(m_V[i].size());j++){
-					delete m_V[i][j];
-					m_V[i][j]=nullptr;
-				}
-			}
-		}
+		virtual~Manage(){}
 		bool checkId(int id);
+		bool checkPId(int Pid);
+		bool ckeckPosition(int row, int col);
 		int findPid(int pId);
+		Base* findWindow(int pId);
 		bool checkRange(int row, int col, int rowN );
 		void AddElement(Base* base);
 		void print();
