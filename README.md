@@ -51,12 +51,12 @@ You can build and run the project in two ways:
 ```bash
 make                     # Compiles the project
 ./bin/cli_window_manager # Runs the program
-
+```
 **Option 2: Build and run in a single step**
 ```bash
 make run                  # Compiles (if needed) and runs the CLI
 ```
-##👀 2. Enter Commands
+### 👀 2. Enter Commands
 After launching the CLI, interact with the program by typing commands to:
 - Create new windows
 - Add text, tables, or buttons to existing windows
