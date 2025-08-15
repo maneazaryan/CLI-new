@@ -5,7 +5,7 @@ bool Manage::checkId(int id)
         {
                         if( m_v[i]->getId()==id)
                         {
-                                std::cout<<"Error : id has already existed"<<std::endl;
+                                std::cout<<"Error : ID has already existed"<<std::endl;
                                 return false;
                         }
         }
@@ -14,14 +14,15 @@ bool Manage::checkId(int id)
 
 bool Manage::checkPId(int Pid) 
 {
-        for(int i = 0; i < m_v.size(); i++ )
-        {
-                        if( m_v[i]->getpId() != Pid)
-                                continue;
-			else
-        		   return true;
-        }
-return false;
+	for(int i = 0; i < m_v.size(); i++ )
+	{
+		if( m_v[i]->getpId() != Pid)
+			continue;
+		else
+			return true;
+	}
+	std::cout<<"Error: invalid parent window ID"<<std::endl;
+	return false;
 }
 bool Manage::ckeckPosition(int row, int col)
 {
@@ -35,7 +36,7 @@ bool Manage::ckeckPosition(int row, int col)
 	}
 	return true;
 }
-int Manage::findPid(int pId)
+int Manage::findIndex(int pId)
 {
         for(int i=0 ; i< m_v.size(); i++)
 	{
@@ -51,19 +52,33 @@ Base* Manage::findWindow(int pId)
         for(int i = 0 ; i<m_v.size(); i++)
 	{
 		w = dynamic_cast<Window*>(m_v[i]);
-		if(w && m_v[i]->getpId() == pId)
-			return w;
+		if(w && m_v[i]->getpId() == pId){
+			return w;}
 	}
-	return  w;
+	return nullptr;
 }
 
 bool Manage::checkRange(int row, int col, int index )
 {
-	std::cout <<"row\t " <<row << "\n" << "col\t "<<col <<"\nindex\t" << index ;
-	if(row<0 || col<0 ) return false;	
+	if(row<0 || col<0 ) 
+	{
+		std::cout<<"Error : out of range"<<std::endl;
+		return false;	
+	}
 	Window* w =dynamic_cast<Window*>(m_v.at(index));
-	if(w==nullptr) return false;
-	return ( row <= w->getRowCount() && col <= w->getColCount());
+	if(w==nullptr)
+	{
+		return false;
+	}
+	else
+	{
+		if( !(row <= w->getRowCount() && col <= w->getColCount()))
+			{
+				std::cout<<"Error : out of range"<<std::endl;
+				return false;
+			}
+	}
+	return true;
 }
 
 void Manage::AddElement(Base* base)
@@ -73,56 +88,20 @@ void Manage::AddElement(Base* base)
 	int row = base->getRow();
 	int col = base->getCol();
 		
-	int index=findPid(pId);
 	m_v.push_back(base);
-
-	//Base* bparent = findWindow(pId);
-//	Window* parent = dynamic_cast<Window*>(bparent);
-//	
-//	if(!parent) 
-//	{
-//		std::cout << "Error : parent not found " << std::endl ;
-//		return;
-//	}
-//	parent->AddChild(base);
-	
-
-
-
-/*
-		if(rowN==-1)
-		{
-			std::cout<<pId;
-			Window* w =dynamic_cast<Window*>(base);
-			if(w==nullptr){
-				std::cout<<"Erorr : wrong pId"<<std::endl;
-				return;
-			}else{
-				m_v.push_back(base);
-				
-			}
-		}
-		else
-		{
-			if(checkRange(row,col,rowN)) 
-			{
-				m_v.push_back(base);
-			}
-			else
-			{
-				std::cout<<"Error : out of range"<<std::endl;
-			}
-		}
-*/
 }
 
-void Manage::print()
+void Manage::Print(int showPid)
 {
-	std::cout<<"------Elements------"<<std::endl;
-	for (Base* el : m_v)
-		std::cout<<el->getId()<< ' ';
-//        win		dynamic_cast<window >
-//  	 vecWPB	win->getchild;
-//      for (
-//	
+	Base* p = findWindow(showPid);
+	Window* w = dynamic_cast<Window*>(p);
+	if(w!=nullptr)
+	{
+		std::cout<<"------Elements------"<<std::endl;
+		w->Print2(w);
+	}
+	else
+	{
+		std::cout<<"Error : no window found with Pid"<< showPid << std::endl;
+	}
 }

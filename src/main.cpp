@@ -276,6 +276,5 @@ int main()
 {
 	Manage m;
 	getCommands(m);
-	m.print();
 	return 0;
 }	

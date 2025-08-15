@@ -17,14 +17,29 @@ const std::vector<Base*>& Window::getChildren()const
 	return m_children;
 }
 void Window::Print()const{
-	for(int i = 0; i < m_rowCount; i++)
+	std::cout<<' ';
+}
+void Window::Print2(Window* w)const{
+	bool found ;
+	for(int row = 0; row < w->getRowCount(); row++)
 	{
-			if(m_children[i]) 
+		for(int col = 0 ; col < w->getColCount(); col++)
+		{
+			found = false ;
+			for(const Base* ch : m_children )
 			{
-				std::cout<< " Window : id "<< getId()
-					<< ", size ( " << getRowCount()<<", " << getColCount()
-					<< ") in (" << getRow()<<',' << getCol() << ") ";
+				if(ch->getRow() == row && ch->getCol() == col)
+				{
+					std::cout << ch->getId() << ' ';
+					found = true;
+					break;
+				}
+			}	
+			if(!found)
+			{
+				std::cout<<"[empty]"<< ' ';
 			}
-			else std::cout << " [empty] "; 
+		}
+		std::cout<<std::endl;
 	}
 }
