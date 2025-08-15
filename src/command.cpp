@@ -1,5 +1,5 @@
 #include "command.h"
-void commandsShow()
+void CommandsShow()
 {
 	std::cout<<"Available commands ։ "<<std::endl;
 	std::cout<<"    add window <id> <rowCount> <colCount> <pId> <row> <col>"<<std::endl;
@@ -9,24 +9,24 @@ void commandsShow()
 	std::cout<<"Show"<<std::endl;
 	std::cout<<"Exit"<<std::endl;
 }
-std::vector<std::string> getCommandsLine()
+std::vector<std::string> GetCommandsLine()
 {
 	std::string line;
 	std::cout<< " < ";
 	getline(std::cin, line);
 
-	std::vector<std::string> commandsLine;
+	std::vector<std::string> CommandsLine;
 
 	std::string word;
 	std::stringstream ss(line);
 	while(ss>>word)
 	{
-		commandsLine.push_back(word);
+		CommandsLine.push_back(word);
 	}
-	return commandsLine;
+	return CommandsLine;
 }
 
-void getFirstWindow(Manage& m)
+void GetFirstWindow(Manage& m)
 {
 	std::cout<<"Command Line Application (CLI)"<<std::endl;
 	std::cout<<"------------------------------"<<std::endl;
@@ -36,7 +36,7 @@ void getFirstWindow(Manage& m)
 	std::vector<std::string> v;
 	while(!quitF)
 	{
-		v = getCommandsLine();
+		v = GetCommandsLine();
 		if(v.size() == 3 )
 		{
 			int id=std::stoi(v[0]);
@@ -55,7 +55,7 @@ void getFirstWindow(Manage& m)
 		     std::cout << "Error: wrong command" << std::endl;
 	}
 }
-void doCommand(const std::vector<std::string>& v, Manage& m, bool& quit)
+void DoCommand(const std::vector<std::string>& v, Manage& m, bool& quit)
 {
 	if(v.empty()) return;
 	if(v[0] == "add")
@@ -68,10 +68,10 @@ void doCommand(const std::vector<std::string>& v, Manage& m, bool& quit)
 			int pId = std::stoi(v[5]);
 			int row = std::stoi(v[6]);
 			int col = std::stoi(v[7]);
-			if(m.checkId(id) && m.checkPId(pId))
+			if(m.CheckId(id) && m.CheckPId(pId))
 			{
-				int index  = m.findIndex(pId);
-				if(!(m.checkRange(row, col, index) && m.ckeckPosition(row,col)))
+				int index  = m.FindIndex(pId);
+				if(!(m.CheckRange(row, col, index) && m.CheckPosition(row,col)))
 				{
 					return;
 				}
@@ -80,13 +80,13 @@ void doCommand(const std::vector<std::string>& v, Manage& m, bool& quit)
 
 				int newpId=id;
 				std::cout <<"-------------------------" <<std::endl;
-				std::cout << pId <<" is pId of new window" <<std::endl;
+				std::cout << newpId <<" is pId of new window" <<std::endl;
 				std::cout <<"-------------------------" <<std::endl;
 
 				Window* base2 = new Window(id, rowCount, colCount, newpId );
 				m.AddElement(base2);
 
-				Base* p = m.findWindow(pId);
+				Base* p = m.FindWindow(pId);
 			 	Window* w = dynamic_cast<Window*>(p);
 				if(w)
 				{
@@ -102,16 +102,16 @@ void doCommand(const std::vector<std::string>& v, Manage& m, bool& quit)
 			int pId = std::stoi(v[4]);
 			int row = std::stoi(v[5]);
 			int col = std::stoi(v[6]);
-			if(m.checkId(id) && m.checkPId(pId))
+			if(m.CheckId(id) && m.CheckPId(pId))
 			{
-				int index  = m.findIndex(pId);
-				if(!(m.checkRange(row, col, index) && m.ckeckPosition(row,col)))
+				int index  = m.FindIndex(pId);
+				if(!(m.CheckRange(row, col, index) && m.CheckPosition(row,col)))
 				{
 					return;
 				}
 				Base* b = new Text(id, text, pId, row, col);
 				m.AddElement(b);
-				Base* p = m.findWindow(pId);
+				Base* p = m.FindWindow(pId);
 				Window* w = dynamic_cast<Window*>(p);
 				if(w)
 				{
@@ -127,16 +127,16 @@ void doCommand(const std::vector<std::string>& v, Manage& m, bool& quit)
 			int pId = std::stoi(v[5]);
 			int row = std::stoi(v[6]);
 			int col = std::stoi(v[7]);
-			if(m.checkId(id) && m.checkPId(pId)){
-				int index = m.findIndex(pId);
-				if(!(m.checkRange(row, col, index) && m.ckeckPosition(row,col)))
+			if(m.CheckId(id) && m.CheckPId(pId)){
+				int index = m.FindIndex(pId);
+				if(!(m.CheckRange(row, col, index) && m.CheckPosition(row,col)))
 				{
 					return;
 				}
 				Base* base = new Table(id,rowCount, colCount,pId, row, col);
 				m.AddElement(base);
 
-				Base* p = m.findWindow(pId);
+				Base* p = m.FindWindow(pId);
 				Window* w = dynamic_cast<Window*>(p);
 				if(w)
 				{
@@ -151,15 +151,15 @@ void doCommand(const std::vector<std::string>& v, Manage& m, bool& quit)
 				int pId = std::stoi(v[4]);
 				int row = std::stoi(v[5]);
 				int col = std::stoi(v[6]);
-			if(m.checkId(id) && m.checkPId(pId)){
-				int index = m.findIndex(pId);
-				if(!(m.checkRange(row, col, index) && m.ckeckPosition(row,col)))
+			if(m.CheckId(id) && m.CheckPId(pId)){
+				int index = m.FindIndex(pId);
+				if(!(m.CheckRange(row, col, index) && m.CheckPosition(row,col)))
 				{
 					return;
 				}
 				Base* base = new Button(id, button, pId, row, col);
 				m.AddElement(base);
-				Base* p = m.findWindow(pId);
+				Base* p = m.FindWindow(pId);
 				Window* w = dynamic_cast<Window*>(p);
 				if(w)
 				{
@@ -181,15 +181,15 @@ void doCommand(const std::vector<std::string>& v, Manage& m, bool& quit)
 		std::cout << "Error: wrong command" << std::endl;
 	}
 }
-void getCommands(Manage& m)
+void GetCommands(Manage& m)
 {
-	getFirstWindow(m);
-	commandsShow();
+	GetFirstWindow(m);
+	CommandsShow();
 	bool quit = true;
 	std::vector<std::string> v;
 	while(quit)
 	{
-		v = getCommandsLine();
-		doCommand(v,m,quit);
+		v = GetCommandsLine();
+		DoCommand(v,m,quit);
 	}
 }

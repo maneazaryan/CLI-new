@@ -1,6 +1,4 @@
 #pragma once
-#include <iostream>	
-#include <vector>
 #include "base.h"
 #include "manage.h"
 class Window: public Base
@@ -9,8 +7,6 @@ class Window: public Base
 		int m_rowCount;
 		int m_colCount;
 		std::vector<Base*> m_children;
-
-
 	public:
 		Window(
 				int id
@@ -41,11 +37,10 @@ class Window: public Base
 			 , m_rowCount(rowCount)
 			 , m_colCount(colCount)
 	{}
-
-		int getRowCount()const;
-		int getColCount()const;
+		int GetRowCount()const;
+		int GetColCount()const;
 		void AddChild(Base* child);
-		const std::vector<Base*>& getChildren()const;
+		const std::vector<Base*>& GetChildren()const;
 		void Print()const override;
 		void Print2(Window* w)const ;
 };

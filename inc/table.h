@@ -7,7 +7,7 @@ class Table: public Base{
         public:
                 Table(int id, int tableRow, int tableCol, int pId, int row, int col ):
                         Base(id, row, col, pId), m_tableRow(tableRow), m_tableCol(tableCol) {}
-		int getTableRow()const;
- 	        int getTableCol()const;
+		int GetTableRow()const;
+ 	        int GetTableCol()const;
                 virtual void Print()const override;
 };

@@ -5,12 +5,9 @@
 #include "base.h"
 #include "window.h"
 #include "manage.h"
-#include "table.h"
-#include "text.h"
-#include "button.h"
 
-void commandsShow();
-std::vector<std::string> getCommandsLine();
-void doCommand(const std::vector<std::string>& v,Manage& m, bool& quit);
-void getFirstWindow(Manage& m);
-void getCommands(Manage& m);
+void CommandsShow();
+std::vector<std::string> GetCommandsLine();
+void DoCommand(const std::vector<std::string>& v,Manage& m, bool& quit);
+void GetFirstWindow(Manage& m);
+void GetCommands(Manage& m);

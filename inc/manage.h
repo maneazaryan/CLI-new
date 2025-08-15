@@ -1,7 +1,4 @@
 #pragma once
-#include <iostream>
-#include <vector>
-#include "base.h"
 #include "window.h"
 #include "text.h"
 #include "button.h"
@@ -12,13 +9,17 @@ class Manage{
 		std::vector<Base*> m_v;
 	public:
 		Manage(){}
-		virtual~Manage(){}
-		bool checkId(int id);
-		bool checkPId(int Pid);
-		bool ckeckPosition(int row, int col);
-		int findIndex(int pId);
-		Base* findWindow(int pId);
-		bool checkRange(int row, int col, int rowN );
+		virtual~Manage()
+		{
+			for(Base* a : m_v)
+				delete a;
+		}
+		bool CheckId(int id);
+		bool CheckPId(int Pid);
+		bool CheckPosition(int row, int col);
+		int FindIndex(int pId);
+		Base* FindWindow(int pId);
+		bool CheckRange(int row, int col, int rowN );
 		void AddElement(Base* base);
 		void Print(int showPid);
 };

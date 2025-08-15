@@ -1,13 +1,19 @@
-CC= g++
-CFLAGS=-Iinc
-OBJ= obj/base.o obj/window.o obj/button.o obj/text.o obj/command.o  obj/table.o obj/manage.o
+CC = g++
+CFLAGS =-Iinc
+
+SRC = $(filter-out src/main.cpp, $(wildcard src/*.cpp))
+OBJ = $(patsubst src/%.cpp, obj/%.o, $(SRC))
+
 obj/%.o:src/%.cpp inc/%.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bin/main.exe: src/main.cpp $(OBJ)
+bin/main.exe:src/main.cpp  $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 
-.PHONY : clean 
+.PHONY : clean run
 
 clean:
 	rm -f obj/*.o bin/*.exe
+
+run: bin/main.exe
+	./bin/main.exe

@@ -1,5 +1,5 @@
 #include "base.h"
-int Base::getpId(){ return m_pId;}
-int Base::getId()const { return m_id;}
-int Base::getRow()const { return m_row;}
-int Base::getCol()const { return m_col;}
+int Base::GetpId(){ return m_pId;}
+int Base::GetId()const { return m_id;}
+int Base::GetRow()const { return m_row;}
+int Base::GetCol()const { return m_col;}

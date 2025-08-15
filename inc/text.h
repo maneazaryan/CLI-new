@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>	
 #include <string>
 #include "base.h"
 class Text: public Base{
@@ -8,6 +7,6 @@ class Text: public Base{
         public:
                 Text(int id, std::string text, int pId, int row, int col ):
                         Base(id, row, col, pId), m_text(text) {}
-		std::string getText()const;
+		std::string GetText()const;
                 virtual void Print()const override;
 };

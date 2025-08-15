@@ -20,10 +20,10 @@ class Base
 			  , m_pId(pId) {}
 
 		virtual ~Base(){};
-		int getpId();
-		int getId()const;
-		int getRow()const;
-		int getCol()const;
+		int GetpId();
+		int GetId()const;
+		int GetRow()const;
+		int GetCol()const;
 		Base() {};
 		virtual void Print()const=0;
 };
