@@ -10,14 +10,11 @@ class Base
 		int m_col;
 		int m_pId;
 	public:
-		Base(int id 
-				,int row=-1
-				,int col=-1
-				,int pId=-1)
-			: m_id(id)
-			  , m_row(row)
-			  , m_col(col)
-			  , m_pId(pId) {}
+		Base(int id, int row =-1, int col = -1, int pId = -1)
+		: m_id(id)
+		, m_row(row)
+		, m_col(col)
+		, m_pId(pId) {}
 
 		virtual ~Base(){};
 		int GetpId();
