@@ -43,7 +43,7 @@ All operations are performed via simple CLI commands.
 
 ## ▶️ Usage
 
-### 🛠️ 1. Build and Run the Project
+### 🛠️ 1. Build and Run the Project 
 
 You can build and run the project in two ways:
 
