@@ -50,7 +50,7 @@ You can build and run the project in two ways:
 **Option 1: Build and run separately**
 ```bash
 make                     # Compiles the project
-./bin/cli_window_manager # Runs the program
+./bin/main.exe # Runs the program
 ```
 **Option 2: Build and run in a single step**
 ```bash
