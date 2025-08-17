@@ -21,6 +21,5 @@ class Base
 		int GetId()const;
 		int GetRow()const;
 		int GetCol()const;
-		Base() {};
 		virtual void Print()const=0;
 };

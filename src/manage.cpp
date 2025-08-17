@@ -43,7 +43,7 @@ bool Manage::CheckPosition(int row, int col, int index)
 		{
 			if(w->GetChildren()[i]->GetRow()==row && w->GetChildren()[i]->GetCol()==col )
 			{	
-				std::cout<<"Error : rosition is not avalibe "<< std::endl;
+				std::cout<<"Error : rosition is not available "<< std::endl;
 				return false;
 			}
 		}	

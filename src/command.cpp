@@ -75,7 +75,7 @@ void DoCommand(const std::vector<std::string>& v, Manage& m, bool& quit)
 				{
 					return;
 				}
-				Window* base = new Window(id, rowCount, colCount, pId, row, col);
+				Base* base = new Window(id, rowCount, colCount, pId, row, col);
 				m.AddElement(base);
 
 				int newpId=id;
@@ -83,14 +83,13 @@ void DoCommand(const std::vector<std::string>& v, Manage& m, bool& quit)
 				std::cout << newpId <<" is pId of new window" <<std::endl;
 				std::cout <<"-------------------------" <<std::endl;
 
-				Window* base2 = new Window(id, rowCount, colCount, newpId );
+				Base* base2 = new Window(id, rowCount, colCount, newpId );
 				m.AddElement(base2);
 
 				Base* p = m.FindWindow(pId);
 			 	Window* w = dynamic_cast<Window*>(p);
 				if(w)
 				{
-				std::cout <<"-------------------------" <<std::endl;
 					w->AddChild(base);
 				}
 			}
