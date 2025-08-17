@@ -16,10 +16,10 @@ class Manage{
 		}
 		bool CheckId(int id);
 		bool CheckPId(int Pid);
-		bool CheckPosition(int row, int col);
+		bool CheckPosition(int row, int col, int index );
 		int FindIndex(int pId);
 		Base* FindWindow(int pId);
-		bool CheckRange(int row, int col, int rowN );
+		bool CheckRange(int row, int col, int index );
 		void AddElement(Base* base);
 		void Print(int showPid);
 };

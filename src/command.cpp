@@ -71,7 +71,7 @@ void DoCommand(const std::vector<std::string>& v, Manage& m, bool& quit)
 			if(m.CheckId(id) && m.CheckPId(pId))
 			{
 				int index  = m.FindIndex(pId);
-				if(!(m.CheckRange(row, col, index) && m.CheckPosition(row,col)))
+				if(!(m.CheckRange(row, col, index) && m.CheckPosition(row,col,index)))
 				{
 					return;
 				}
@@ -105,7 +105,7 @@ void DoCommand(const std::vector<std::string>& v, Manage& m, bool& quit)
 			if(m.CheckId(id) && m.CheckPId(pId))
 			{
 				int index  = m.FindIndex(pId);
-				if(!(m.CheckRange(row, col, index) && m.CheckPosition(row,col)))
+				if(!(m.CheckRange(row, col, index) && m.CheckPosition(row,col,index)))
 				{
 					return;
 				}
@@ -129,11 +129,11 @@ void DoCommand(const std::vector<std::string>& v, Manage& m, bool& quit)
 			int col = std::stoi(v[7]);
 			if(m.CheckId(id) && m.CheckPId(pId)){
 				int index = m.FindIndex(pId);
-				if(!(m.CheckRange(row, col, index) && m.CheckPosition(row,col)))
+				if(!(m.CheckRange(row, col, index) && m.CheckPosition(row, col, index)))
 				{
 					return;
 				}
-				Base* base = new Table(id,rowCount, colCount,pId, row, col);
+				Base* base = new Table(id, rowCount, colCount, pId, row, col);
 				m.AddElement(base);
 
 				Base* p = m.FindWindow(pId);
@@ -153,7 +153,7 @@ void DoCommand(const std::vector<std::string>& v, Manage& m, bool& quit)
 				int col = std::stoi(v[6]);
 			if(m.CheckId(id) && m.CheckPId(pId)){
 				int index = m.FindIndex(pId);
-				if(!(m.CheckRange(row, col, index) && m.CheckPosition(row,col)))
+				if(!(m.CheckRange(row, col, index) && m.CheckPosition(row, col, index)))
 				{
 					return;
 				}

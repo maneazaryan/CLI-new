@@ -24,21 +24,35 @@ bool Manage::CheckPId(int Pid)
 	std::cout<<"Error: invalid parent window ID"<<std::endl;
 	return false;
 }
-bool Manage::CheckPosition(int row, int col)
+bool Manage::CheckPosition(int row, int col, int index)
 {
-	for(int i = 0; i < m_v.size(); i++ )
+	if(row < 0 || col < 0)
 	{
-		if(m_v[i]->GetRow()==row && m_v[i]->GetCol()==col )
-		{	
-			std::cout<<"Error : rosition is not avalibe "<< std::endl;
-			return false;
-		}
+		std::cout<<"Error : rosition is not avalibe "<< std::endl;
+		return false;
+
+	}
+	Window* w = dynamic_cast<Window*>(m_v.at(index));
+	if(w == nullptr)
+	{
+		return false;
+	}
+	else
+	{
+		for(int i = 0; i < w->GetChildren().size(); i++ )
+		{
+			if(w->GetChildren()[i]->GetRow()==row && w->GetChildren()[i]->GetCol()==col )
+			{	
+				std::cout<<"Error : rosition is not avalibe "<< std::endl;
+				return false;
+			}
+		}	
 	}
 	return true;
 }
 int Manage::FindIndex(int pId)
 {
-        for(int i=0 ; i< m_v.size(); i++)
+        for(int i = 0 ; i < m_v.size(); i++)
 	{
 		if( m_v[i]->GetpId()==pId)
 			return i;
@@ -72,7 +86,7 @@ bool Manage::CheckRange(int row, int col, int index )
 	}
 	else
 	{
-		if( !(row <= w->GetRowCount() && col <= w->GetColCount()))
+		if( !(row < w->GetRowCount() && col < w->GetColCount()))
 			{
 				std::cout<<"Error : out of range"<<std::endl;
 				return false;
