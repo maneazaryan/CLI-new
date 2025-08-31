@@ -8,5 +8,5 @@ class Text: public Base{
                 Text(int id, std::string text, int pId, int row, int col ):
                         Base(id, row, col, pId), m_text(text) {}
 		std::string GetText()const;
-                virtual void Print()const override;
+                virtual void Draw()const override;
 };

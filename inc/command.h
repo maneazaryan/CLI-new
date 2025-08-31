@@ -8,6 +8,6 @@
 
 void CommandsShow();
 std::vector<std::string> GetCommandsLine();
-void DoCommand(const std::vector<std::string>& v,Manage& m, bool& quit);
-void GetFirstWindow(Manage& m);
-void GetCommands(Manage& m);
+void GetFirstWindow(Manage* m, bool& quit);
+void DoCommand(const std::vector<std::string>& v,Manage* m, bool& quit);
+void GetCommands(Manage* m);

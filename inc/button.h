@@ -8,5 +8,5 @@ class Button: public Base{
                 Button (int id, std::string button, int pId, int row, int col ):
                         Base(id, row, col, pId), m_button(button) {}
 		std::string GetButton()const;
-                virtual void Print()const override;
+                virtual void Draw()const override;
 };

@@ -1,116 +1,111 @@
 #include "manage.h"
+Manage* Manage::GetInstance()
+{
+	if(m_pManage==nullptr)
+	{
+		return new Manage();
+	}
+	return m_pManage;
+}
 bool Manage::CheckId(int id) 
 {
-        for(int i=0 ; i < m_v.size(); i++)
-        {
-                        if( m_v[i]->GetId()==id)
-                        {
-                                std::cout<<"Error : ID has already existed"<<std::endl;
-                                return false;
-                        }
-        }
-        return true;
+		if(m_v.find(id)!= m_v.end())
+		{
+				std::cout<<"Error : ID has already existed"<<std::endl;
+				return false;
+		}
+		else return true;
 }
 
 bool Manage::CheckPId(int Pid) 
 {
-	for(int i = 0; i < m_v.size(); i++ )
-	{
-		if( m_v[i]->GetpId() != Pid)
-			continue;
-		else
-			return true;
-	}
-	std::cout<<"Error: invalid parent window ID"<<std::endl;
-	return false;
-}
-bool Manage::CheckPosition(int row, int col, int index)
-{
-	if(row < 0 || col < 0)
-	{
-		std::cout<<"Error : rosition is not avalibe "<< std::endl;
-		return false;
 
-	}
-	Window* w = dynamic_cast<Window*>(m_v.at(index));
-	if(w == nullptr)
-	{
-		return false;
-	}
-	else
-	{
-		for(int i = 0; i < w->GetChildren().size(); i++ )
+		if(m_v.find(Pid) == m_v.end())
 		{
-			if(w->GetChildren()[i]->GetRow()==row && w->GetChildren()[i]->GetCol()==col )
-			{	
-				std::cout<<"Error : rosition is not available "<< std::endl;
+				std::cout<<"Error: invalid parent window ID"<<std::endl;
 				return false;
-			}
-		}	
-	}
-	return true;
+		}
+		else return true;
 }
-int Manage::FindIndex(int pId)
+bool Manage::CheckPosition(int row, int col, int pId)
 {
-        for(int i = 0 ; i < m_v.size(); i++)
-	{
-		if( m_v[i]->GetpId()==pId)
-			return i;
-	}
-	return -1;
+		if(row < 0 || col < 0)
+		{
+				std::cout<<"Error : position is not avalibe "<< std::endl;
+				return false;
+		}
+		std::map<int, Base*> ::iterator it = m_v.find(pId);
+		if(it==m_v.end())
+		{
+				return false;
+		}
+		Window* w = dynamic_cast<Window*>(it->second);
+		if(!w)
+		{
+				return false;
+		}
+		if(w->IsPositionFree(row, col)==false)
+		{
+				std::cout<<"Error : position is not available "<< std::endl;
+				return false;
+		}
+		return true;
 }
-
 Base* Manage::FindWindow(int pId)
 {
-	Window* w;	
-        for(int i = 0 ; i<m_v.size(); i++)
-	{
-		w = dynamic_cast<Window*>(m_v[i]);
-		if(w && m_v[i]->GetpId() == pId){
-			return w;}
-	}
-	return nullptr;
+		std::map<int, Base*>::iterator it = m_v.find(pId);
+		if(it!= m_v.end())
+		{
+				Window* w= dynamic_cast<Window*>(it-> second);
+				if(w)
+				{
+						return w;}
+		}
+		return nullptr;
 }
 
-bool Manage::CheckRange(int row, int col, int index )
+bool Manage::CheckRange(int row, int col, int pId )
 {
-	if(row<0 || col<0 ) 
-	{
-		std::cout<<"Error : out of range"<<std::endl;
-		return false;	
-	}
-	Window* w =dynamic_cast<Window*>(m_v.at(index));
-	if(w==nullptr)
-	{
-		return false;
-	}
-	else
-	{
-		if( !(row < w->GetRowCount() && col < w->GetColCount()))
-			{
+		if(row<0 || col<0 ) 
+		{
+				std::cout<<"Error : out of range"<<std::endl;
+				return false;	
+		}
+		std::map<int, Base*> ::iterator it = m_v.find(pId);
+		if(it==m_v.end())
+		{
+				return false;
+		}
+		Window* w = dynamic_cast<Window*>(it->second);
+		if(!w)	
+		{
+				return false;
+		}
+		if(!(row< w->GetRowCount() && col < w->GetColCount()))
+		{
+
 				std::cout<<"Error : out of range"<<std::endl;
 				return false;
-			}
-	}
-	return true;
+		}
+		return true;
 }
 
 void Manage::AddElement(Base* base)
 {
-	m_v.push_back(base);
+		m_v.insert({base->GetpId(), base});
 }
 
 void Manage::Print(int showPid)
 {
-	Base* p = FindWindow(showPid);
-	Window* w = dynamic_cast<Window*>(p);
-	if(w!=nullptr)
-	{
-		std::cout<<"------Elements------"<<std::endl;
-		w->Print2(w);
-	}
-	else
-	{
-		std::cout<<"Error : no window found with Pid"<< showPid << std::endl;
-	}
+		Base* p = FindWindow(showPid);
+		Window* w = dynamic_cast<Window*>(p);
+		if(w)
+		{
+				std::cout<<"------Elements------"<<std::endl;
+				w->Print2(w);
+		}
+		else
+		{
+				std::cout<<"Error : no window found with Pid"<< showPid << std::endl;
+		}
 }

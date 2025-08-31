@@ -1,24 +1,36 @@
 #include "window.h"
 
-int Window::GetRowCount()const
+int Window::GetRowCount()const { return m_rowCount;}
+int Window::GetColCount()const { return m_colCount;}
+
+bool Window::IsPositionFree(int row, int col)const
 {
-	return m_rowCount;
+	std::map<int, Base*>::const_iterator it;
+	for(it=m_children.cbegin(); it != m_children.cend(); it++)
+		{
+			Base* child= it->second;
+			if(child->GetRow()==row && child->GetCol()==col)
+			{
+				return false;
+			}
+		}
+	return true;
 }
-int Window::GetColCount()const
-{
-	return m_colCount;
-}
+
 void Window::AddChild(Base* child) 
 {
-	m_children.push_back(child);
+	m_children.insert({child->GetId(),child});
 }
-const std::vector<Base*>& Window::GetChildren()const
+
+const std::map<int, Base*>& Window::GetChildren()const
 {
 	return m_children;
 }
-void Window::Print()const{
+
+void Window::Draw()const{
 	std::cout<<"Window : "<<GetId()<<std::endl;
 }
+
 void Window::Print2(Window* w)const{
 	bool found ;
 	for(int row = 0; row < w->GetRowCount(); row++)
@@ -26,8 +38,10 @@ void Window::Print2(Window* w)const{
 		for(int col = 0 ; col < w->GetColCount(); col++)
 		{
 			found = false ;
-			for(const Base* ch : m_children )
+			std::map<int, Base*>::const_iterator it;
+			for(it=m_children.cbegin(); it!= m_children.cend(); it++ )
 			{
+				Base* ch = it->second;
 				if(ch->GetRow() == row && ch->GetCol() == col)
 				{
 					std::cout << ch->GetId() << ' ';
