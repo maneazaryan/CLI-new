@@ -4,8 +4,8 @@
 class Command;
 class Invorker
 {
-    std::vector<Command*> v;
-    Command* c;
+    std::vector<Command*> m_vPCmd;
+    Command* m_cmd;
     public:
     void executeComand(Command* com);
     ~Invorker();

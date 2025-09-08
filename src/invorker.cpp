@@ -2,13 +2,12 @@
 
 void Invorker::executeComand(Command* com)
 {
-		c=com ;
+		m_cmd=com ;
 //		v.push_back(c);
-		c->execute();
+		m_cmd->execute();
 }
 Invorker::~Invorker ()
 {
-		for(Command* a: v)
-				delete a;
+		m_vPCmd.clear();
 }
 
