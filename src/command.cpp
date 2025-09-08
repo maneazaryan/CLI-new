@@ -1,4 +1,5 @@
 #include "command.h"
+
 void CommandsShow()
 {
 		std::cout<<"Available commands ։ \n"
