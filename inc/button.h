@@ -5,8 +5,7 @@ class Button: public Base{
         private:
                 std::string m_button;
         public:
-                Button (int id, std::string button, int pId, int row, int col ):
-                        Base(id, row, col, pId), m_button(button) {}
-		std::string GetButton()const;
+                Button (int id, int pId, int row , int col, std::string button);
+				std::string GetButton()const;
                 virtual void Draw()const override;
 };

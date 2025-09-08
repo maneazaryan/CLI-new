@@ -9,12 +9,16 @@ Manage* Manage::GetInstance()
 }
 bool Manage::CheckId(int id) 
 {
-		if(m_v.find(id)!= m_v.end())
+		for(const auto& pair : m_v)
 		{
-				std::cout<<"Error : ID has already existed"<<std::endl;
-				return false;
+				Base* b = pair.second;
+				if(b && b->GetId()==id)
+				{
+						std::cout<<"Error : ID has already existed"<<std::endl;
+						return false;
+				}
 		}
-		else return true;
+		return true;
 }
 
 bool Manage::CheckPId(int Pid) 
@@ -51,18 +55,6 @@ bool Manage::CheckPosition(int row, int col, int pId)
 		}
 		return true;
 }
-Base* Manage::FindWindow(int pId)
-{
-		std::map<int, Base*>::iterator it = m_v.find(pId);
-		if(it!= m_v.end())
-		{
-				Window* w= dynamic_cast<Window*>(it-> second);
-				if(w)
-				{
-						return w;}
-		}
-		return nullptr;
-}
 
 bool Manage::CheckRange(int row, int col, int pId )
 {
@@ -89,23 +81,51 @@ bool Manage::CheckRange(int row, int col, int pId )
 		}
 		return true;
 }
+bool Manage::M_CheckParametrs( int m_id, int m_pId, int m_row, int m_col)
+{
+		if(CheckId(m_id) &&  
+						CheckPId(m_pId) &&
+						CheckRange(m_row, m_col, m_pId) &&  
+						CheckPosition(m_row,m_col,m_pId))
+		{
+				return true;
+		}
+		else return false;    
+}
+
+Window* Manage::FindWindow(int pId)
+{
+		std::multimap<int, Base*>::iterator it = m_v.find(pId);
+		if(it!= m_v.end())
+		{
+				Window* w= dynamic_cast<Window*>(it-> second);
+				if(w)
+				{
+						return w;
+				}
+		}
+		return nullptr;
+}
 
 void Manage::AddElement(Base* base)
 {
 		m_v.insert({base->GetpId(), base});
 }
-
+//test
 void Manage::Print(int showPid)
 {
-		Base* p = FindWindow(showPid);
-		Window* w = dynamic_cast<Window*>(p);
+		Window* w = FindWindow(showPid);
 		if(w)
 		{
-				std::cout<<"------Elements------"<<std::endl;
-				w->Print2(w);
+				w->Show(w);
 		}
 		else
 		{
-				std::cout<<"Error : no window found with Pid"<< showPid << std::endl;
+				std::cout<<"Error : no window found with Pid "<< showPid << std::endl;
 		}
+}
+Manage::~Manage()
+{
+		for (std::map<int, Base*>::iterator it = m_v.begin(); it != m_v.end(); ++it)
+				delete it->second;
 }

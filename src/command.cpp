@@ -25,13 +25,12 @@ std::vector<std::string> GetCommandsLine()
 		return CommandsLine;
 }
 
-void GetFirstWindow(Manage* m, bool& quit )
+void GetFirstWindow(Manage* m, bool& quit,std::vector<std::string>& v, Invorker& inv )
 {
 		std::cout<<"Command Line Application (CLI)\n"<<
 					"------------------------------\n"<<
 					"First wondow : enter ID , rowCount and colCount\n"<<
 					"Type Exit to quit"<<std::endl;
-		std::vector<std::string> v;
 		bool quitF = true;
 		while(quitF)
 		{
@@ -46,33 +45,37 @@ void GetFirstWindow(Manage* m, bool& quit )
 						int id=std::stoi(v.at(0));
 						int rowCount = std::stoi(v.at(1));
 						int colCount = std::stoi(v.at(2));
-						Base* base = new Window(id, rowCount, colCount);
-						m->AddElement(base);
 						quitF = false;
-						std::cout <<"-------------------------" <<std::endl;
-						std::cout <<"-1 is pId of the first window" <<std::endl;
-						std::cout <<"-------------------------" <<std::endl;
+						Command* cmd = new Add_F_WindowCommand(m,id, rowCount, colCount);	
+						inv.executeComand(cmd);
 				}
 				else 
 						std::cout << "Error: wrong command" << std::endl;
 		}
 }
-
-void DoCommand(const std::vector<std::string>& v, Manage* m, bool& quit)
+void DoCommand(const std::vector<std::string>& v, Manage* m, bool& quit, Invorker& inv)
 {
 		if(v.empty()) return;
 		int v_Size= v.size();
-		// std::string sCmdName = v[0];
-		if((v.at(0) == "Show" || v.at(0)== "show") && v_Size == 1)
+		std::string sCmdName = v.at(0);
+		if((sCmdName == "Show" || sCmdName == "show") && v_Size == 1)
 		{
 				std::cout<<"Enter Pid : ";
-				int showPid;
-				std::cin>>showPid ;
-				m->Print(showPid);
+				std::string input;
+				std::cin >> input ;
+				std::regex digits("^-?[0-9]+$");
+				if(std::regex_match(input, digits))
+				{
+					int showPid = std::stoi(input);
+					m->Print(showPid);
+				}
+				else 
+					std::cout << "Error:: Invalid input\n";
+
 		}
-		else if((v.at(0) == "Exit" || v.at(0) == "exit") && v_Size == 1) 
+		else if((sCmdName == "Exit" || sCmdName == "exit") && v_Size == 1) 
 				quit=false;
-		else if(v[0] == "add" && (v_Size==8 || v_Size==7))
+		else if(sCmdName == "add" && (v_Size==8 || v_Size==7))
 		{
 				int id, pId, row, col;
 				try
@@ -88,96 +91,32 @@ void DoCommand(const std::vector<std::string>& v, Manage* m, bool& quit)
 					return;
 				}
 
-				// std::string sClassName = v.at(1);
-				// std::string sClassId = sdt::stoi(v[2]);
-				if(v[1] == "window" &&  v_Size == 8)
+				std::string sClassName = v.at(1);
+				if(sClassName == "window" &&  v_Size == 8)
 				{
-
 						int rowCount = std::stoi(v[6]);
 						int colCount = std::stoi(v[7]);
-						if(!(m->CheckId(id)	 && 
-												m->CheckPId(pId) &&
-												m->CheckRange(row, col, pId) && 
-												m->CheckPosition(row,col,pId)))
-						{
-								return;
-						}
-						Base* base = new Window(id, rowCount, colCount, pId, row, col);
-						m->AddElement(base);
-
-						int newpId=id;
-						std::cout <<"-------------------------" <<std::endl;
-						std::cout << newpId <<" is pId of new window" <<std::endl;
-						std::cout <<"-------------------------" <<std::endl;
-
-						Base* base2 = new Window(id, rowCount, colCount, newpId );
-						m->AddElement(base2);
-
-						Base* p = m->FindWindow(pId);
-						Window* w = dynamic_cast<Window*>(p);
-						if(w)
-						{
-								w->AddChild(base);
-						}	
+						Command* com = new Add_WindowCommand(m, id, pId, row, col, rowCount, colCount) ;
+						inv.executeComand(com);	
 				}
-				else if(v[1] == "text" && v_Size == 7)
+				else if(sClassName == "text" && v_Size == 7)
 				{
 						std::string text = v[6];
-						if(!(m->CheckId(id) && 
-												m->CheckPId(pId)&&
-												m->CheckRange(row, col, pId) && 
-												m->CheckPosition(row,col,pId)))
-						{
-								return;
-						}
-						Base* b = new Text(id, text, pId, row, col);
-						m->AddElement(b);
-						Base* p = m->FindWindow(pId);
-						Window* w = dynamic_cast<Window*>(p);
-						if(w)
-						{
-								w->AddChild(b);
-						}
+						Command* com = new Add_TextCommand(m,id, pId, row, col ,text);
+						inv.executeComand(com);
 				}
-				else if(v[1] == "table" && v_Size == 8)
+				else if(sClassName == "table" && v_Size == 8)
 				{
 						int rowCount = std::stoi(v[6]);
 						int colCount = std::stoi(v[7]);
-						if(!(m->CheckId(id) && 
-												m->CheckPId(pId)&&
-												m->CheckRange(row, col, pId) && 
-												m->CheckPosition(row, col, pId)))
-						{
-								return;
-						}
-						Base* base = new Table(id, rowCount, colCount, pId, row, col);
-						m->AddElement(base);
-
-						Base* p = m->FindWindow(pId);
-						Window* w = dynamic_cast<Window*>(p);
-						if(w)
-						{
-								w->AddChild(base);
-						}
+						Command* com = new Add_TableCommand(m,id, pId, row, col , rowCount, colCount);
+						inv.executeComand(com);	
 				}
-				else if(v[1] == "button" && v_Size == 7)
+				else if(sClassName == "button" && v_Size == 7)
 				{
 						std::string button = v[6];
-						if(!(m->CheckId(id) && 
-												m->CheckPId(pId)&&
-												m->CheckRange(row, col, pId) && 
-												m->CheckPosition(row, col, pId)))
-						{
-								return;
-						}
-						Base* base = new Button(id, button, pId, row, col);
-						m->AddElement(base);
-						Base* p = m->FindWindow(pId);
-						Window* w = dynamic_cast<Window*>(p);
-						if(w)
-						{
-								w->AddChild(base);
-						}
+						Command* com = new Add_ButtonCommand(m,id, pId, row, col , button);
+						inv.executeComand(com);	
 				}
 				else 
 						std::cout<<"Wrong add command"<<std::endl;
@@ -188,15 +127,16 @@ void DoCommand(const std::vector<std::string>& v, Manage* m, bool& quit)
 
 void GetCommands(Manage* m)
 {
+		Invorker inv;
 		bool quit = true;
-		GetFirstWindow(m, quit);
+		std::vector<std::string> v;
+		GetFirstWindow(m, quit, v, inv );
 		if(!quit)
 			return;
 		CommandsShow();
-		std::vector<std::string> v;
 		while(quit)
 		{
 				v = GetCommandsLine();
-				DoCommand(v,m,quit);
+				DoCommand(v, m, quit, inv);
 		}
 }

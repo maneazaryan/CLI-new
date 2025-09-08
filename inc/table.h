@@ -5,8 +5,7 @@ class Table: public Base{
 				int m_tableRow;
 				int m_tableCol;
 		public:
-				Table(int id, int tableRow, int tableCol, int pId, int row, int col ):
-						Base(id, row, col, pId), m_tableRow(tableRow), m_tableCol(tableCol) {}
+				Table(int id, int pId, int row, int col , int tableRow, int tableCol);
 				int GetTableRow()const;
 				int GetTableCol()const;
 				virtual void Draw()const override;

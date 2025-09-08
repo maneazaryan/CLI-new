@@ -5,23 +5,22 @@
 #include "table.h"
 #include "command.h"
 #include <map>
+class Window;
 class Manage{
 		private:
 				static Manage* m_pManage; 
-				std::map<int, Base*> m_v;
+				std::multimap<int, Base*> m_v;
 				Manage(){}
 		public:
-				virtual~Manage()
-				{
-						for (std::map<int, Base*>::iterator it = m_v.begin(); it != m_v.end(); ++it)
-								delete it->second;
-				}
+				virtual~Manage();
 				static Manage* GetInstance();
 				bool CheckId(int id);
 				bool CheckPId(int Pid);
 				bool CheckPosition(int row, int col, int pId);
-				Base* FindWindow(int pId);
 				bool CheckRange(int row, int col, int pId);
+ 				bool M_CheckParametrs( int m_id, int m_pId, int m_col, int m_row);
+				Window* FindWindow(int pId);
 				void AddElement(Base* base);
+//test for me
 				void Print(int showPid);
 };
