@@ -26,7 +26,7 @@ std::vector<std::string> GetCommandsLine()
 		return CommandsLine;
 }
 
-void GetFirstWindow( std::vector<std::string>& v, Invorker& inv )
+void GetFirstWindow( std::vector<std::string>& v )
 {
 		std::cout<<"Command Line Application (CLI)\n"<<
 					"------------------------------\n"<<
@@ -42,7 +42,8 @@ void GetFirstWindow( std::vector<std::string>& v, Invorker& inv )
 						if(rowCount > 0 && colCount > 0 )
 						{
 							Command* cmd = new Add_F_WindowCommand(id, rowCount, colCount);	
-							inv.executeComand(cmd);
+							//inv.executeComand(cmd);
+							cmd->execute();
 							break;
 						}
 				}
@@ -50,7 +51,7 @@ void GetFirstWindow( std::vector<std::string>& v, Invorker& inv )
 						std::cout << "Error: wrong command" << std::endl;
 		}
 }
-void DoCommand(const std::vector<std::string>& v, bool& quit, Invorker& inv)
+void DoCommand(const std::vector<std::string>& v, bool& quit)
 {
 		int v_Size= v.size();
 		std::string sCmdName = v.at(0);
@@ -73,9 +74,11 @@ void DoCommand(const std::vector<std::string>& v, bool& quit, Invorker& inv)
 				quit=false;	
 		else if(sCmdName=="add")
 		{
-			Command* com = CommandFactory::CreateCommand(v);
-			if(com) 
-				inv.executeComand(com);
+			Command* cmd = CommandFactory::CreateCommand(v);
+			if(cmd) 
+							cmd->execute();
+			//	inv.executeComand(com);
+
 		}
 		else
 				std::cout << "Error: wrong command" << std::endl;
@@ -83,10 +86,9 @@ void DoCommand(const std::vector<std::string>& v, bool& quit, Invorker& inv)
 
 void GetCommands()
 {
-		Invorker inv;
 		bool quit = true;
 		std::vector<std::string> args;
-		GetFirstWindow( args, inv );
+		GetFirstWindow( args );
 		if(!quit)
 			return;
 		CommandsShow();
@@ -94,6 +96,6 @@ void GetCommands()
 		{
 				args = GetCommandsLine();
 				if(args.empty()) continue ;
-				DoCommand(args, quit, inv);
+				DoCommand(args, quit);
 		}
 }

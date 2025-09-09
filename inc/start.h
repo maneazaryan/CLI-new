@@ -9,12 +9,10 @@
 
 #include "command.h"
 #include "fwindowCommand.h"
-#include "invorker.h"
 
-class Invorker;
 class Add_F_WindowCommand;
 void CommandsShow();
 std::vector<std::string> GetCommandsLine();
-void GetFirstWindow(std::vector<std::string>& v, Invorker& inv);
-void DoCommand(const std::vector<std::string>& v, bool& quit, Invorker& inv);
+void GetFirstWindow(std::vector<std::string>& v);
+void DoCommand(const std::vector<std::string>& v, bool& quit);
 void GetCommands();
