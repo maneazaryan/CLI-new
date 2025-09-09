@@ -15,7 +15,7 @@ void Manage::DeleteInstance()
 	m_pManage = nullptr;
 }
 
-std::multimap<int, Base*> Manage::GetElements() const {
+const std::multimap<int, Base*>& Manage::GetElements() const {
     return m_mElements;
 }
 Window* Manage::FindWindow(int pId)

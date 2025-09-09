@@ -18,7 +18,7 @@ class Manage{
 				Manage& operator=(const Manage&) = delete;
 				static Manage* GetInstance();
 				static void DeleteInstance();
-				std::multimap<int, Base*>GetElements() const ;
+				const std::multimap<int, Base*>& GetElements() const ;
 				Window* FindWindow(int pId);
 				void AddElement(Base* base);
 };

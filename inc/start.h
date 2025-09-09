@@ -2,8 +2,9 @@
 #include <iostream>	
 #include <vector>
 #include <memory>
-#include <sstream>
+
 #include <regex>
+#include "parser.h"
 #include "base.h"
 #include "windowPrinter.h"
 #include "window.h"
@@ -14,7 +15,6 @@
 
 class Add_F_WindowCommand;
 void CommandsShow();
-std::vector<std::string> GetCommandsLine();
 void GetFirstWindow(std::vector<std::string>& v);
 void DoCommand(const std::vector<std::string>& v, bool& quit);
 void GetCommands();

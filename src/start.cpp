@@ -10,30 +10,15 @@ void CommandsShow()
 				<<"Show\n"
 				<<"Exit"<<std::endl;
 }
-std::vector<std::string> GetCommandsLine()
-{
-		std::string line;
-		std::cout<< " < ";
-		getline(std::cin, line);
-		std::vector<std::string> CommandsLine;
-
-		std::string word;
-		std::stringstream ss(line);
-		while(ss>>word)
-		{
-				CommandsLine.push_back(word);
-		}
-		return CommandsLine;
-}
-
 void GetFirstWindow( std::vector<std::string>& v )
 {
 		std::cout<<"Command Line Application (CLI)\n"<<
 					"------------------------------\n"<<
 					"First wondow : enter ID , rowCount and colCount\n"<<std::endl;
+		std::unique_ptr<Parser> parser = std::make_unique<Parser>();
 		while(true)
 		{
-				v = GetCommandsLine();
+				v = parser -> ParseLine();
 				if(v.size() == 3 )
 				{
 						int id=std::stoi(v.at(0));
@@ -86,7 +71,9 @@ void DoCommand(const std::vector<std::string>& v, bool& quit)
 
 void GetCommands()
 {
+		std::unique_ptr<Parser> parser = std::make_unique<Parser>();
 		bool quit = true;
+
 		std::vector<std::string> args;
 		GetFirstWindow( args );
 		if(!quit)
@@ -94,7 +81,7 @@ void GetCommands()
 		CommandsShow();
 		while(quit)
 		{
-				args = GetCommandsLine();
+				args = parser->ParseLine();
 				if(args.empty()) continue ;
 				DoCommand(args, quit);
 		}
