@@ -16,15 +16,6 @@ int Window::GetColCount()const
 	return m_colCount;
 }
 
-bool Window::IsPositionFree(int row, int col)const
-{
-	for(int it = 0 ; it < m_children.size(); it++)
-		{
-			if(m_children.at(it)->GetRow()==row && m_children.at(it)->GetCol()==col)
-				return false;
-		}
-	return true;
-}
 
 void Window::AddChild(Base* child) 
 {

@@ -44,11 +44,17 @@ bool Checker::CheckPosition(int row, int col, int pId)
 		{
 				return false;
 		}
-		if(w->IsPositionFree(row, col)==false)
+		std::vector< Base*>  m_children = w -> GetChildren();
+		for(int it = 0 ; it < m_children.size(); it++)
 		{
+			if(m_children.at(it)->GetRow()==row && m_children.at(it)->GetCol()==col)
+			{
 				std::cout<<"Error : position is not available "<< std::endl;
 				return false;
+			}
 		}
+
+
 		return true;
 }
 

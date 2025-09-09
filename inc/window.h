@@ -14,7 +14,6 @@ class Window: public Base
 				Window(int id, int pId, int rowCount, int colCount);
 				int GetRowCount()const;
 				int GetColCount()const;
-				bool IsPositionFree(int row, int col)const;
 				void AddChild(Base* child);
 				const std::vector< Base*>& GetChildren()const;
 				void Draw()const override;
