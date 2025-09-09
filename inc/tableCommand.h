@@ -1,6 +1,8 @@
 #pragma once
+#include <memory>
 #include "command.h"
 #include "manage.h"
+#include "checker.h"
 class Add_TableCommand:public Command
 {
 		Manage* m_pManage ;

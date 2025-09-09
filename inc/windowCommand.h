@@ -1,7 +1,9 @@
 #pragma once
 #include <iostream>	
+#include <memory>
 #include "command.h"
 #include "manage.h"
+#include "checker.h"
 class Add_WindowCommand : public Command
 {
 		Manage* m_pManage;

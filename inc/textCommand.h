@@ -1,7 +1,9 @@
 #pragma once
 #include "command.h"
 #include <string>	
+#include <memory>
 #include "manage.h"
+#include "checker.h"
 class Add_TextCommand:public Command
 {
 		Manage* m_pManage;

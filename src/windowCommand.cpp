@@ -10,7 +10,8 @@ Add_WindowCommand::Add_WindowCommand(int id, int pId, int row, int col,  int row
 
 void Add_WindowCommand::execute()
 {
-		if(!(m_pManage->M_CheckParametrs( m_id, m_pId, m_row, m_col)))
+		std::unique_ptr<Checker> checker = std::make_unique<Checker>();
+		if(!(checker -> M_CheckParametrs( m_id, m_pId, m_row, m_col)))
 		{
 				return;
 		}

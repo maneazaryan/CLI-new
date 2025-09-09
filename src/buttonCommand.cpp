@@ -6,7 +6,8 @@ Add_ButtonCommand:: Add_ButtonCommand(int id, int pId, int row, int col, std::st
 }
 void Add_ButtonCommand::execute()
 {
-		if(!(m_pManage->M_CheckParametrs( m_id, m_pId, m_row, m_col)))
+		std::unique_ptr<Checker> checker = std::make_unique<Checker>();
+		if(!(checker->M_CheckParametrs( m_id, m_pId, m_row, m_col)))
 				return;
 		Base* base = new Button(m_id, m_pId, m_row, m_col, m_button);
 		m_pManage->AddElement(base);

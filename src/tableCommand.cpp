@@ -8,7 +8,8 @@ Add_TableCommand::Add_TableCommand(int id, int pId, int row, int col, int rowCou
 }
 void Add_TableCommand::execute()
 {
-		if(!(m_pManage->M_CheckParametrs( m_id, m_pId, m_row, m_col) ))
+		std::unique_ptr<Checker> checker = std::make_unique<Checker>();
+		if(!(checker->M_CheckParametrs( m_id, m_pId, m_row, m_col) ))
 				return;
 		Base* base = new Table(m_id, m_pId, m_row, m_col, m_rowCount, m_colCount);
 		m_pManage->AddElement(base);

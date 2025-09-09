@@ -6,7 +6,8 @@ Add_TextCommand::Add_TextCommand(int id, int pId, int row, int col, std::string 
 }
 void Add_TextCommand::execute()
 {
-		if(!(m_pManage->M_CheckParametrs( m_id, m_pId, m_row, m_col)))
+		std::unique_ptr<Checker> checker = std::make_unique<Checker>();
+		if(!(checker -> M_CheckParametrs( m_id, m_pId, m_row, m_col)))
 				return;
 		Base* b = new Text(m_id, m_pId, m_row, m_col, m_text);
 		m_pManage->AddElement(b);
