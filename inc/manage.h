@@ -9,12 +9,15 @@ class Window;
 class Manage{
 		private:
 				static Manage* m_pManage; 
-				std::multimap<int, Base*> m_v;
+				std::multimap<int, Base*> m_mElements;
 		private:
 				Manage(){}
 		public:
 				virtual~Manage();
+				Manage(const Manage&) = delete;
+				Manage& operator=(const Manage&) = delete;
 				static Manage* GetInstance();
+				static void DeleteInstance();
 				bool CheckId(int id);
 				bool CheckPId(int Pid);
 				bool CheckPosition(int row, int col, int pId);

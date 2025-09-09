@@ -39,7 +39,7 @@ const std::vector<Base*>& Window::GetChildren()const
 void Window::Draw()const{
 	std::cout<<"Window "<<GetId()<< " ";
 }
-
+//test for me , delete
 void Window::Show(Window* w)const{
 	bool found ;
 	for(int row = 0; row < w->GetRowCount(); row++)

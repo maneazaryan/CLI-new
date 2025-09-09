@@ -76,8 +76,7 @@ void DoCommand(const std::vector<std::string>& v, bool& quit)
 		{
 			Command* cmd = CommandFactory::CreateCommand(v);
 			if(cmd) 
-							cmd->execute();
-			//	inv.executeComand(com);
+					cmd->execute();
 
 		}
 		else

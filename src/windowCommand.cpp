@@ -26,12 +26,10 @@ void Add_WindowCommand::execute()
 		Base* base2 = new Window(m_id, newPid, m_row, m_col, m_rowCount, m_colCount );
 		m_pManage->AddElement(base2);
 
-		Window* p = m_pManage->FindWindow(m_pId);
-		if(p)
+		Window* parent = m_pManage->FindWindow(m_pId);
+		if(parent)
 		{
-				p->AddChild(base2);
+				parent->AddChild(base2);
 		}
-		std::cout <<"-------------------------" <<std::endl;
 		std::cout << newPid<<" is pId of new window" <<std::endl;
-		std::cout <<"-------------------------" <<std::endl;
 }
