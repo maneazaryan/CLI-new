@@ -64,7 +64,8 @@ void DoCommand(const std::vector<std::string>& v, bool& quit)
 				if(std::regex_match(input, digits))
 				{
 					int showPid = std::stoi(input);
-					Manage::GetInstance()->Print(showPid);
+					std::unique_ptr<WindowPrinter> print = std::make_unique<WindowPrinter>();
+					print->Print(showPid);
 				}
 				else 
 					std::cout << "Error:: Invalid input\n";

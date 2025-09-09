@@ -36,19 +36,6 @@ void Manage::AddElement(Base* base)
 {
 		m_mElements.insert({base->GetpId(), base});
 }
-//test
-void Manage::Print(int showPid)
-{
-		Window* w = FindWindow(showPid);
-		if(w)
-		{
-				w->Show(w);
-		}
-		else
-		{
-				std::cout<<"Error : no window found with Pid "<< showPid << std::endl;
-		}
-}
 Manage::~Manage()
 {
 		for (std::map<int, Base*>::iterator it = m_mElements.begin(); it != m_mElements.end(); ++it)

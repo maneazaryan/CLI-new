@@ -21,6 +21,4 @@ class Manage{
 				std::multimap<int, Base*>GetElements() const ;
 				Window* FindWindow(int pId);
 				void AddElement(Base* base);
-//test for me
-				void Print(int showPid);
 };

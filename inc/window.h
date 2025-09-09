@@ -18,6 +18,4 @@ class Window: public Base
 				void AddChild(Base* child);
 				const std::vector< Base*>& GetChildren()const;
 				void Draw()const override;
-//test for me 
-				void Show(Window* w)const ;
 };

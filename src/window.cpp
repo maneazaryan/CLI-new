@@ -39,28 +39,3 @@ const std::vector<Base*>& Window::GetChildren()const
 void Window::Draw()const{
 	std::cout<<"Window "<<GetId()<< " ";
 }
-//test for me , delete
-void Window::Show(Window* w)const{
-	bool found ;
-	for(int row = 0; row < w->GetRowCount(); row++)
-	{
-		for(int col = 0 ; col < w->GetColCount(); col++)
-		{
-			found = false ;
-			for(int i = 0 ; i< m_children.size(); i++ )
-			{
-				if(m_children.at(i)->GetRow() == row && m_children.at(i)->GetCol() == col)
-				{
-					m_children.at(i)->Draw();
-					found = true;
-					break;
-				}
-			}	
-			if(!found)
-			{
-				std::cout<<"[empty]"<< ' ';
-			}
-		}
-		std::cout<<std::endl;
-	}
-}

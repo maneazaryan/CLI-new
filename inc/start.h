@@ -1,9 +1,11 @@
 #pragma once
 #include <iostream>	
 #include <vector>
+#include <memory>
 #include <sstream>
 #include <regex>
 #include "base.h"
+#include "windowPrinter.h"
 #include "window.h"
 #include "commandFactory.h"
 
