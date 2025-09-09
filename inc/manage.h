@@ -3,13 +3,14 @@
 #include "text.h"
 #include "button.h"
 #include "table.h"
-#include "command.h"
+#include "start.h"
 #include <map>
 class Window;
 class Manage{
 		private:
 				static Manage* m_pManage; 
 				std::multimap<int, Base*> m_v;
+		private:
 				Manage(){}
 		public:
 				virtual~Manage();

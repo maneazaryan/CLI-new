@@ -1,9 +1,10 @@
 #include "manage.h"
+Manage* Manage::m_pManage=nullptr;
 Manage* Manage::GetInstance()
 {
 	if(m_pManage==nullptr)
 	{
-		return new Manage();
+		m_pManage =  new Manage();
 	}
 	return m_pManage;
 }
@@ -23,7 +24,6 @@ bool Manage::CheckId(int id)
 
 bool Manage::CheckPId(int Pid) 
 {
-
 		if(m_v.find(Pid) == m_v.end())
 		{
 				std::cout<<"Error: invalid parent window ID"<<std::endl;

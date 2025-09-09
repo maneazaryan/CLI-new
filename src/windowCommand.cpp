@@ -1,14 +1,16 @@
 #include "windowCommand.h"
-Add_WindowCommand::Add_WindowCommand(Manage* mm, int id, int pId, int row, int col,  int rowCount, int colCount)
-         :
-		  m (mm)
-         , m_id(id), m_pId(pId)
+Add_WindowCommand::Add_WindowCommand(int id, int pId, int row, int col,  int rowCount, int colCount)
+         : m_id(id), m_pId(pId)
          , m_row(row), m_col(col)
-         , m_rowCount(rowCount), m_colCount(colCount){}
+         , m_rowCount(rowCount), m_colCount(colCount)
+
+{
+   m_pManage = Manage::GetInstance();
+}
 
 void Add_WindowCommand::execute()
 {
-		if(!(m->M_CheckParametrs( m_id, m_pId, m_row, m_col)))
+		if(!(m_pManage->M_CheckParametrs( m_id, m_pId, m_row, m_col)))
 		{
 				return;
 		}
@@ -18,13 +20,13 @@ void Add_WindowCommand::execute()
 				return;
 		}
 		Base* base = new Window(m_id, m_pId, m_row , m_col, m_rowCount, m_colCount);
-		m->AddElement(base);
+		m_pManage->AddElement(base);
 
 		int newPid=m_id;
 		Base* base2 = new Window(m_id, newPid, m_row, m_col, m_rowCount, m_colCount );
-		m->AddElement(base2);
+		m_pManage->AddElement(base2);
 
-		Window* p = m->FindWindow(m_pId);
+		Window* p = m_pManage->FindWindow(m_pId);
 		if(p)
 		{
 				p->AddChild(base2);

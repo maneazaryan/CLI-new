@@ -1,9 +1,7 @@
-#include "command.h"
-#include "manage.h"
+#include "start.h"
 
-Manage* Manage::m_pManage=nullptr;
 int main()
 {
-	GetCommands(Manage::GetInstance());
+	GetCommands();
 	return 0;
 }	
