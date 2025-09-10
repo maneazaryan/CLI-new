@@ -53,8 +53,6 @@ void Start::GetFirstWindow( std::vector<std::string>& v )
 void Start::GetCommands()
 {
 		std::unique_ptr<Parser> parser = std::make_unique<Parser>();
-		bool quit = true;
-
 		std::vector<std::string> args;
 		GetFirstWindow( args );
 		if(! m_bQuit)

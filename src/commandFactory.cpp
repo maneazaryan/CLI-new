@@ -14,7 +14,7 @@ Command* CommandFactory::CreateCommand(const std::vector<std::string>& args)
 					return new Add_WindowCommand(args);
 			else if(sClassName == "text" && args_Size == 7)
 					return new Add_TextCommand(args);
-			else if(sClassName == "text" && args_Size == 7)
+			else if(sClassName == "table" && args_Size == 8)
 					return new Add_TableCommand( args);
 			else if(sClassName == "button" && args_Size == 7)
 					return new Add_ButtonCommand(args);
