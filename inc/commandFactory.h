@@ -9,6 +9,7 @@
 #include "tableCommand.h"
 #include "textCommand.h"
 #include "show.h"
+#include "exit.h"
 class CommandFactory
 {
     public:

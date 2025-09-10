@@ -19,8 +19,10 @@ Command* CommandFactory::CreateCommand(const std::vector<std::string>& args)
 			else if(sClassName == "button" && args_Size == 7)
 					return new Add_ButtonCommand(args);
 		}
-		else if(sName == "show" && args_Size == 2)
+		else if((sName == "show" || sName == "Show") && args_Size == 2)
 			return new Show(args);
+		else if((sName == "Exit" || sName == "exit") && args_Size == 1)
+			return new Exit();
 		std::cout<<"Error: wrong command" <<std::endl;
 		return nullptr;
 }

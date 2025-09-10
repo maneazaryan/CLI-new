@@ -3,7 +3,8 @@
 
 int main()
 {
-	GetCommands();
+	Start::GetInstance()->GetCommands();
 	Manage::DeleteInstance();
+	Start::DeleteInstance();
 	return 0;
 }	
