@@ -1,5 +1,6 @@
 #pragma once
 #include "command.h"
+#include <vector>
 #include <string>	
 #include <memory>
 #include "manage.h"
@@ -10,6 +11,6 @@ class Add_TextCommand:public Command
         int m_id, m_pId, m_row, m_col;
         std::string m_text;
         public:
-        Add_TextCommand(int id, int pId, int row, int col, std::string text );
+        Add_TextCommand(const std::vector<std::string>& args);
         void execute()override;
 };

@@ -8,7 +8,7 @@
 #include "windowCommand.h"
 #include "tableCommand.h"
 #include "textCommand.h"
-
+#include "show.h"
 class CommandFactory
 {
     public:

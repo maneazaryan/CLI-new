@@ -1,8 +1,20 @@
 #include "textCommand.h"
-Add_TextCommand::Add_TextCommand(int id, int pId, int row, int col, std::string text )
-                       :m_id(id), m_pId(pId), m_row(row), m_col(col), m_text(text) 
+Add_TextCommand::Add_TextCommand(const std::vector<std::string>& args)
 {
-   m_pManage = Manage::GetInstance();
+		m_pManage = Manage::GetInstance();
+		try
+		{
+				m_id  = std::stoi(args[2]);
+				m_pId = std::stoi(args[3]);
+				m_row = std::stoi(args[4]);
+				m_col = std::stoi(args[5]);
+		}
+		catch(const std::invalid_argument& e ) 
+		{
+				std::cout<<"Error : invalid argument"<<std::endl;
+				return ;
+		}
+		m_text = args[6];
 }
 void Add_TextCommand::execute()
 {

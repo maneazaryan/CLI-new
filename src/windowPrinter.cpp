@@ -1,14 +1,15 @@
 #include "windowPrinter.h"
 void WindowPrinter::Print(int showPid)
 {
-		Window* w =Manage::GetInstance() -> FindWindow(showPid);
-		m_children = w -> GetChildren(); 
+		Window* w = Manage::GetInstance() -> FindWindow(showPid);
 		if(!w)
 		{
 				std::cout<<"Error : no window found with Pid "<< showPid << std::endl;
+				return;
 		}
 		else
 		{
+				m_children = w -> GetChildren(); 
 				bool found ;
 				for(int row = 0; row < w->GetRowCount(); row++)
 				{

@@ -18,5 +18,5 @@ class Checker
 	public:
 		Checker ();
 		bool M_CheckParametrs( int m_id, int m_pId, int m_col, int m_row);
-
+		bool M_Check_Count( int rowCount, int colCount);
 };

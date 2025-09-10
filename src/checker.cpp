@@ -53,8 +53,6 @@ bool Checker::CheckPosition(int row, int col, int pId)
 				return false;
 			}
 		}
-
-
 		return true;
 }
 
@@ -93,4 +91,14 @@ bool Checker::M_CheckParametrs( int m_id, int m_pId, int m_row, int m_col)
 				return true;
 		}
 		else return false;    
+}
+
+bool Checker::M_Check_Count( int rowCount, int colCount)
+{
+	if(rowCount <= 0 || colCount <= 0)
+	{
+		std::cout<<"Error : rowCount must be > 0 and colCount must be > 0"<<std::endl;
+		return false;
+	}
+	return true;
 }

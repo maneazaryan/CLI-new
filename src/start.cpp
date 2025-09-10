@@ -7,7 +7,7 @@ void CommandsShow()
 				<<"	add table  <id> <pId> <row> <col> <rowCount> <colCount>\n"
 				<<"	add text   <id> <pId> <row> <col> <text>\n"
 				<<"	add button <id> <pId> <row> <col> <text>\n"
-				<<"Show\n"
+				<<"Show + pId\n"
 				<<"Exit"<<std::endl;
 }
 void GetFirstWindow( std::vector<std::string>& v )
@@ -18,55 +18,28 @@ void GetFirstWindow( std::vector<std::string>& v )
 		std::unique_ptr<Parser> parser = std::make_unique<Parser>();
 		while(true)
 		{
-				v = parser -> ParseLine();
-				if(v.size() == 3 )
-				{
-						int id=std::stoi(v.at(0));
-						int rowCount = std::stoi(v.at(1));
-						int colCount = std::stoi(v.at(2));
-						if(rowCount > 0 && colCount > 0 )
-						{
-							Command* cmd = new Add_F_WindowCommand(id, rowCount, colCount);	
-							//inv.executeComand(cmd);
-							cmd->execute();
-							break;
-						}
-				}
-				else 
-						std::cout << "Error: wrong command" << std::endl;
+			v = parser -> ParseLine();
+			v.push_back("first");
+			Command* cmd = CommandFactory::CreateCommand(v);
+			if(cmd) 
+			{
+					cmd->execute();
+			break;
+			}
 		}
 }
 void DoCommand(const std::vector<std::string>& v, bool& quit)
 {
 		int v_Size= v.size();
 		std::string sCmdName = v.at(0);
-		if((sCmdName == "Show" || sCmdName == "show") && v_Size == 1)
-		{
-				std::cout<<"Enter Pid : ";
-				std::string input;
-				std::cin >> input ;
-				std::regex digits("^-?[0-9]+$");
-				if(std::regex_match(input, digits))
-				{
-					int showPid = std::stoi(input);
-					std::unique_ptr<WindowPrinter> print = std::make_unique<WindowPrinter>();
-					print->Print(showPid);
-				}
-				else 
-					std::cout << "Error:: Invalid input\n";
-
-		}
-		else if((sCmdName == "Exit" || sCmdName == "exit") && v_Size == 1) 
+		if((sCmdName == "Exit" || sCmdName == "exit") && v_Size == 1) 
 				quit=false;	
-		else if(sCmdName=="add")
+		else 
 		{
 			Command* cmd = CommandFactory::CreateCommand(v);
 			if(cmd) 
 					cmd->execute();
-
 		}
-		else
-				std::cout << "Error: wrong command" << std::endl;
 }
 
 void GetCommands()

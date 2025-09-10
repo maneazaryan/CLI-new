@@ -1,10 +1,23 @@
 #include "tableCommand.h"
 
-Add_TableCommand::Add_TableCommand(int id, int pId, int row, int col, int rowCount, int colCount )
-                       : m_id(id), m_pId(pId), m_row(row), m_col(col)
-                       , m_rowCount(rowCount), m_colCount(colCount) 
+Add_TableCommand::Add_TableCommand(const std::vector<std::string>& args)
 {
-   m_pManage = Manage::GetInstance();
+	m_pManage = Manage::GetInstance();
+        try
+        {
+                m_id       = std::stoi(args[2]);
+                m_pId      = std::stoi(args[3]);
+                m_row      = std::stoi(args[4]);
+                m_col      = std::stoi(args[5]);
+                m_rowCount = std::stoi(args[6]);
+                m_colCount = std::stoi(args[7]);
+        }
+        catch(const std::invalid_argument& e ) 
+        {
+				std::cout<<"Error : invalid argument"<<std::endl;
+				return ;
+        }
+
 }
 void Add_TableCommand::execute()
 {
