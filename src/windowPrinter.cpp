@@ -1,7 +1,7 @@
 #include "windowPrinter.h"
 void WindowPrinter::Print(int showPid)
 {
-		Window* w = Manage::GetInstance() -> FindWindow(showPid);
+		std::shared_ptr<Window> w = Manage::GetInstance() -> FindWindow(showPid);
 		if(!w)
 		{
 				std::cout<<"Error : no window found with Pid "<< showPid << std::endl;

@@ -31,14 +31,14 @@ void Add_WindowCommand::execute()
 				std::cout<<"-1 is Root window Pid, you can't use is as an id"<<std::endl;
 				return;
 		}
-		Base* base = new Window(m_id, m_pId, m_row , m_col, m_rowCount, m_colCount);
+		std::shared_ptr<Base> base = std::make_shared<Window>(m_id, m_pId, m_row , m_col, m_rowCount, m_colCount);
 		m_pManage->AddElement(base);
 
 		int newPid=m_id;
-		Base* base2 = new Window(m_id, newPid, m_row, m_col, m_rowCount, m_colCount );
+		std::shared_ptr<Base> base2 = std::make_shared<Window>(m_id, newPid, m_row, m_col, m_rowCount, m_colCount );
 		m_pManage->AddElement(base2);
 
-		Window* parent = m_pManage->FindWindow(m_pId);
+		std::shared_ptr<Window> parent = m_pManage->FindWindow(m_pId);
 		if(parent)
 		{
 				parent->AddChild(base2);

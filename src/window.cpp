@@ -17,12 +17,12 @@ int Window::GetColCount()const
 }
 
 
-void Window::AddChild(Base* child) 
+void Window::AddChild(std::shared_ptr<Base> child) 
 {
 	m_children.push_back(child);
 }
 
-const std::vector<Base*>& Window::GetChildren()const
+const std::vector<std::shared_ptr<Base>>& Window::GetChildren()const
 {
 	return m_children;
 }

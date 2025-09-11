@@ -15,15 +15,15 @@ void Manage::DeleteInstance()
 	m_pManage = nullptr;
 }
 
-const std::multimap<int, Base*>& Manage::GetElements() const {
+const std::multimap<int, std::shared_ptr<Base>>& Manage::GetElements() const {
     return m_mElements;
 }
-Window* Manage::FindWindow(int pId)
+std::shared_ptr<Window> Manage::FindWindow(int pId)
 {
-		std::multimap<int, Base*>::iterator it = m_mElements.find(pId);
+		std::multimap<int, std::shared_ptr<Base>>::iterator it = m_mElements.find(pId);
 		if(it!= m_mElements.end())
 		{
-				Window* w= dynamic_cast<Window*>(it-> second);
+				std::shared_ptr<Window> w= std::dynamic_pointer_cast<Window>(it-> second);
 				if(w)
 				{
 						return w;
@@ -32,12 +32,7 @@ Window* Manage::FindWindow(int pId)
 		return nullptr;
 }
 
-void Manage::AddElement(Base* base)
+void Manage::AddElement(std::shared_ptr<Base> base)
 {
 		m_mElements.insert({base->GetpId(), base});
-}
-Manage::~Manage()
-{
-		for (std::map<int, Base*>::iterator it = m_mElements.begin(); it != m_mElements.end(); ++it)
-				delete it->second;
 }

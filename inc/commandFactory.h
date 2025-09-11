@@ -10,8 +10,9 @@
 #include "textCommand.h"
 #include "show.h"
 #include "exit.h"
+#include <memory>
 class CommandFactory
 {
     public:
-        static Command* CreateCommand(const std::vector<std::string>& args);
+        static std::shared_ptr<Command> CreateCommand(const std::vector<std::string>& args);
 };

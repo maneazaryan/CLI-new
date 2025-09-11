@@ -1,14 +1,12 @@
 #include "checker.h"
-Checker::Checker()
-{
-	m_mElements = Manage::GetInstance()->GetElements();
-}
+Checker::Checker(): m_mElements(Manage::GetInstance()->GetElements())
+{}
 
 bool Checker::CheckId(int id) 
 {
 		for(const auto& pair : m_mElements)
 		{
-				Base* b = pair.second;
+				std::shared_ptr<Base> b = pair.second;
 				if(b && b->GetId()==id)
 				{
 						std::cout<<"Error : ID has already existed"<<std::endl;
@@ -34,20 +32,20 @@ bool Checker::CheckPosition(int row, int col, int pId)
 				std::cout<<"Error : position is not avalibe "<< std::endl;
 				return false;
 		}
-		std::map<int, Base*> ::iterator it = m_mElements.find(pId);
-		if(it==m_mElements.end())
+		std::multimap<int, std::shared_ptr<Base>>::const_iterator it = m_mElements.find(pId);
+		if(it == m_mElements.end())
 		{
 				return false;
 		}
-		Window* w = dynamic_cast<Window*>(it->second);
+		std::shared_ptr<Window> w = std::dynamic_pointer_cast<Window>(it->second);
 		if(!w)
 		{
 				return false;
 		}
-		std::vector< Base*>  m_children = w -> GetChildren();
+		std::vector< std::shared_ptr<Base>>  m_children = w -> GetChildren();
 		for(int it = 0 ; it < m_children.size(); it++)
 		{
-			if(m_children.at(it)->GetRow()==row && m_children.at(it)->GetCol()==col)
+			if(m_children.at(it)->GetRow() == row && m_children.at(it)->GetCol()==col)
 			{
 				std::cout<<"Error : position is not available "<< std::endl;
 				return false;
@@ -60,15 +58,15 @@ bool Checker::CheckRange(int row, int col, int pId )
 {
 		if(row<0 || col<0 ) 
 		{
-				std::cout<<"Error : out of range"<<std::endl;
+				std::cout << "Error : out of range" << std::endl;
 				return false;	
 		}
-		std::map<int, Base*> ::iterator it = m_mElements.find(pId);
+		std::multimap<int, std::shared_ptr<Base>>::const_iterator it = m_mElements.find(pId);
 		if(it==m_mElements.end())
 		{
 				return false;
 		}
-		Window* w = dynamic_cast<Window*>(it->second);
+		std::shared_ptr<Window> w = std::dynamic_pointer_cast<Window>(it->second);
 		if(!w)	
 		{
 				return false;

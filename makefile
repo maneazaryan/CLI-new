@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS =-Iinc
+CFLAGS =-Iinc 
 
 SRC = $(filter-out src/main.cpp, $(wildcard src/*.cpp))
 OBJ = $(patsubst src/%.cpp, obj/%.o, $(SRC))

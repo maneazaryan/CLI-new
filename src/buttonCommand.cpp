@@ -21,9 +21,9 @@ void Add_ButtonCommand::execute()
 		std::unique_ptr<Checker> checker = std::make_unique<Checker>();
 		if(!(checker->M_CheckParametrs( m_id, m_pId, m_row, m_col)))
 				return;
-		Base* base = new Button(m_id, m_pId, m_row, m_col, m_button);
+		std::shared_ptr<Base> base = std::make_shared<Button>(m_id, m_pId, m_row, m_col, m_button);
 		m_pManage->AddElement(base);
-		Window* w = m_pManage->FindWindow(m_pId);
+		std::shared_ptr<Window> w = m_pManage->FindWindow(m_pId);
 		if(w)
 		{
 				w->AddChild(base);

@@ -5,11 +5,11 @@
 #include "manage.h"
 #include "base.h"
 #include "window.h"
-
+#include <memory>
 class Checker
 {
 	private:
-		std::multimap<int, Base*> m_mElements ;
+		const std::multimap<int, std::shared_ptr<Base>>& m_mElements ;
 	private:
 		bool CheckId(int id);
 		bool CheckPId(int Pid);

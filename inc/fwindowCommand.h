@@ -2,6 +2,7 @@
 #include <iostream>	
 #include <vector>
 #include <string>
+#include <memory>
 #include "command.h"
 #include "checker.h"
 #include "base.h"

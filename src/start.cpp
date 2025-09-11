@@ -42,7 +42,7 @@ void Start::GetFirstWindow( std::vector<std::string>& v )
 		{
 			v = parser -> ParseLine();
 			v.push_back("first");
-			Command* cmd = CommandFactory::CreateCommand(v);
+			std::shared_ptr<Command> cmd = CommandFactory::CreateCommand(v);
 			if(cmd) 
 			{
 					cmd->execute();
@@ -62,7 +62,7 @@ void Start::GetCommands()
 		{
 				args = parser->ParseLine();
 				if(args.empty()) continue ;
-				Command* cmd = CommandFactory::CreateCommand(args);
+				std::shared_ptr<Command> cmd = CommandFactory::CreateCommand(args);
 				if(cmd) 
 					cmd->execute();
 		}

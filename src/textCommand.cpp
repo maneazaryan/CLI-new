@@ -21,9 +21,9 @@ void Add_TextCommand::execute()
 		std::unique_ptr<Checker> checker = std::make_unique<Checker>();
 		if(!(checker -> M_CheckParametrs( m_id, m_pId, m_row, m_col)))
 				return;
-		Base* b = new Text(m_id, m_pId, m_row, m_col, m_text);
+		std::shared_ptr<Base> b = std::make_shared<Text>(m_id, m_pId, m_row, m_col, m_text);
 		m_pManage->AddElement(b);
-		Window* w = m_pManage->FindWindow(m_pId);
+		std::shared_ptr<Window> w = m_pManage->FindWindow(m_pId);
 		if(w)
 				w->AddChild(b);
 }

@@ -5,20 +5,21 @@
 #include "table.h"
 #include "start.h"
 #include <map>
+#include <memory>
 class Window;
 class Manage{
 		private:
 				static Manage* m_pManage; 
-				std::multimap<int, Base*> m_mElements;
+				std::multimap<int, std::shared_ptr<Base>> m_mElements;
 		private:
 				Manage(){}
 		public:
-				virtual~Manage();
+				virtual~Manage(){};
 				Manage(const Manage&) = delete;
 				Manage& operator=(const Manage&) = delete;
 				static Manage* GetInstance();
 				static void DeleteInstance();
-				const std::multimap<int, Base*>& GetElements() const ;
-				Window* FindWindow(int pId);
-				void AddElement(Base* base);
+				const std::multimap<int, std::shared_ptr<Base>>& GetElements() const ;
+				std::shared_ptr<Window> FindWindow(int pId);
+				void AddElement(std::shared_ptr<Base> base);
 };
